@@ -6,11 +6,12 @@
 package searcharchive;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -38,7 +39,7 @@ public class SearchArchive {
     return files;
   }
   
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     SearchArchive archives = new SearchArchive();
     Scanner scan = new Scanner(System.in);
     
@@ -53,9 +54,16 @@ public class SearchArchive {
     List<File> files = archives.listFiles(path, file_search);
     System.out.println(files.size()+ " files were found.");
     
+    FileWriter result_file = new FileWriter("./result.txt");
+    PrintWriter record_file = new PrintWriter(result_file);
+    
+    record_file.printf(files.size()+ " files were found.%n");
     for(File file : files){
       System.out.println(file.getAbsoluteFile());
+      record_file.printf(file.getAbsoluteFile() + "%n");
     }
+    
+    result_file.close();
   }
   
 }
