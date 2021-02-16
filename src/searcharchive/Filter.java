@@ -24,7 +24,7 @@ public class Filter implements FileFilter {
   
   public boolean accept(File file){
     String str_regex = this.fileName.replaceAll(" ", "|");
-    Pattern pattern = Pattern.compile(str_regex, Pattern.CASE_INSENSITIVE);
+    Pattern pattern = Pattern.compile(this.fileName, Pattern.CASE_INSENSITIVE);
    
     Matcher matcher = pattern.matcher(file.getName());
     if(file.isDirectory()){
